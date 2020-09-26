@@ -3,7 +3,7 @@ const mongoose = require('mongoose');
 const expressGraphQL = require('express-graphql');
 const PORT = process.env.PORT || 4000;
 const schema = require('./schema');
-
+const cors = require('cors');
 // mongodb connection
 let db = mongoose.connect(
   'mongodb://127.0.0.1:27017/graphql',
@@ -21,6 +21,7 @@ connection.on('error', (e)=>{
 
 
 const app = express();
+app.use(cors());
 app.use('/graphql', expressGraphQL({
   schema: schema,
   graphiql: true
